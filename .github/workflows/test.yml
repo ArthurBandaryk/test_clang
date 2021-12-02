@@ -10,4 +10,4 @@ on:
 
 jobs:
   check_code_format:
-    uses: ArthurBandaryk/dev-tools/.github/workflows/check_code_format.yml@main
+    uses: ArthurBandaryk/test_clang/dev-tools/.github/workflows/check_code_format.yml@main
