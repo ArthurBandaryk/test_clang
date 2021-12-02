@@ -17,7 +17,9 @@ jobs:
       run: |
         git submodule init
         git submodule update
-        chmod +x dev-tools/generate_compile_commands.sh && dev-tools/./generate_compile_commands.sh       
+        chmod +x dev-tools/generate_compile_commands.sh && dev-tools/./generate_compile_commands.sh
+        echo "compile_commands.json content: \n"
+        cat ./compile_commands.json
 
     - name: Use clang-tidy-review action to review any PR on code style
       uses: ZedThree/clang-tidy-review@v0.7.0
