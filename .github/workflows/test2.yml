@@ -22,6 +22,9 @@ jobs:
 #         cat ./compile_commands.json
 #         ls
 
+    - name: Generate compile_commands.json
+      run: chmod +x test.sh && ./test.sh
+
     - name: Use clang-tidy-review action to review any PR on code style
       uses: ZedThree/clang-tidy-review@v0.7.0
       #id: review
