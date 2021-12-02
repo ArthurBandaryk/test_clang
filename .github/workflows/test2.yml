@@ -7,23 +7,23 @@ on:
 
 jobs:
   prepare_pr_review:
-  name: PR review using clang-tidy-review action
-  runs-on: ubuntu-latest
-  steps:
-  - uses: actions/checkout@v2
+    name: PR review using clang-tidy-review action
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
 
   
-  - name: Generate compile_commands.json
-    run: chmod +x dev-tools/generate_compile_commands.sh && dev-tools/./generate_compile_commands.sh       
+    - name: Generate compile_commands.json
+      run: chmod +x dev-tools/generate_compile_commands.sh && dev-tools/./generate_compile_commands.sh       
 
-  - name: Use clang-tidy-review action to review any PR on code style
-    uses: ZedThree/clang-tidy-review@v0.7.0
-    id: review
-    with:
-      # List of clang-tidy checks.
-      clang_tidy_checks: '-*,performance-*,readability-*,bugprone-*,clang-analyzer-*,cppcoreguidelines-*,mpi-*,misc-*,-readability-implicit-bool-conversion,-readability-qualified-auto,-cppcoreguidelines-owning-memory,-cppcoreguidelines-avoid-magic-numbers,-readability-magic-numbers,-readability-static-accessed-through-instance,-cppcoreguidelines-pro-type-static-cast-downcast,-bugprone-suspicious-enum-usage,-readability-uppercase-literal-suffix,-cppcoreguidelines-avoid-non-const-global-variables,-cppcoreguidelines-pro-bounds-array-to-pointer-decay,-misc-no-recursion,-readability-isolate-declaration,-cppcoreguidelines-pro-type-vararg,-misc-non-private-member-variables-in-classes,-performance-no-automatic-move,-readability-avoid-const-params-in-decls,-cppcoreguidelines-non-private-member-variables-in-classes'
+    - name: Use clang-tidy-review action to review any PR on code style
+      uses: ZedThree/clang-tidy-review@v0.7.0
+      id: review
+      with:
+        # List of clang-tidy checks.
+        clang_tidy_checks: '-*,performance-*,readability-*,bugprone-*,clang-analyzer-*,cppcoreguidelines-*,mpi-*,misc-*,-readability-implicit-bool-conversion,-readability-qualified-auto,-cppcoreguidelines-owning-memory,-cppcoreguidelines-avoid-magic-numbers,-readability-magic-numbers,-readability-static-accessed-through-instance,-cppcoreguidelines-pro-type-static-cast-downcast,-bugprone-suspicious-enum-usage,-readability-uppercase-literal-suffix,-cppcoreguidelines-avoid-non-const-global-variables,-cppcoreguidelines-pro-bounds-array-to-pointer-decay,-misc-no-recursion,-readability-isolate-declaration,-cppcoreguidelines-pro-type-vararg,-misc-non-private-member-variables-in-classes,-performance-no-automatic-move,-readability-avoid-const-params-in-decls,-cppcoreguidelines-non-private-member-variables-in-classes'
     
-  - name: Passed C++ style guide checks
-  # Doesn't work for now the if statement below.  
-    if: steps.review.outputs.total_comments > 0
-    run: exit 1
+    - name: Passed C++ style guide checks
+    # Doesn't work for now the if statement below.  
+      if: steps.review.outputs.total_comments > 0
+      run: exit 1
