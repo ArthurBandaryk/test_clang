@@ -14,7 +14,10 @@ jobs:
 
   
     - name: Generate compile_commands.json
-      run: chmod +x dev-tools/generate_compile_commands.sh && dev-tools/./generate_compile_commands.sh       
+      run: |
+        git submodule init
+        git submodule update
+        chmod +x dev-tools/generate_compile_commands.sh && dev-tools/./generate_compile_commands.sh       
 
     - name: Use clang-tidy-review action to review any PR on code style
       uses: ZedThree/clang-tidy-review@v0.7.0
